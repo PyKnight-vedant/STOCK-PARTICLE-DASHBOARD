@@ -363,10 +363,13 @@ with tab_corr:
     if run_corr:
         @st.cache_data(show_spinner=False)
         def load_corr_data(start, end):
-            djia   = yf.download("^DJI",  start=str(start), end=str(end), progress=False)["Close"].squeeze().dropna()
-            nasdaq = yf.download("^IXIC", start=str(start), end=str(end), progress=False)["Close"].squeeze().dropna()
+            djia_raw = yf.download("^DJI", start=str(start), end=str(end), progress=False, auto_adjust=True)
+            djia = djia_raw["Close"].squeeze().dropna() if "Close" in djia_raw.columns else djia_raw.xs("Close", axis=1, level=0).squeeze().dropna()
+
+            nasdaq_raw = yf.download("^IXIC", start=str(start), end=str(end), progress=False, auto_adjust=True)
+            nasdaq = nasdaq_raw["Close"].squeeze().dropna() if "Close" in nasdaq_raw.columns else nasdaq_raw.xs("Close", axis=1, level=0).squeeze().dropna()
             comps  = ["MMM","AXP","BA","CAT","CVX","KO","XOM","GE","IBM","MCD","MRK","PG","WMT","JPM","MSFT"]
-            comp_data = yf.download(comps, start="2003-01-01", end="2010-01-01", progress=False)["Close"].dropna(how="all")
+            comp_data = yf.download(comps, start="2003-01-01", end="2010-01-01", progress=False, auto_adjust=True)["Close"].dropna(how="all")
             return djia, nasdaq, comp_data
 
         with st.spinner("Downloading market data…"):
