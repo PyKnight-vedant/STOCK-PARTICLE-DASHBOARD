@@ -1,6 +1,9 @@
-streamlit
-yfinance
-numpy
-pandas
-matplotlib
-scipy
+matplotlib==3.10.0
+matplotlib-inline==0.1.7
+numpy==1.26.4
+pandas==2.3.0
+pandas-datareader==0.10.0
+scipy==1.13.1
+scipy-openblas32==0.3.30.359.2
+streamlit==1.44.0
+yfinance==0.2.66
