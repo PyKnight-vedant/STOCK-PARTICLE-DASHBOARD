@@ -87,7 +87,15 @@ section[data-testid="stSidebar"] * { color: #e6edf3 !important; }
     border-radius: 6px !important;
 }
 div[data-baseweb="select"] * { color: #e6edf3 !important; background-color: #21262d !important; }
-
+div[data-baseweb="input"] { background-color: #21262d !important; border: 1px solid #30363d !important; }
+div[data-baseweb="base-input"] { background-color: #21262d !important; }
+.stTextInput > div > div, .stDateInput > div > div, .stNumberInput > div > div { background-color: #21262d !important; border: none !important; }
+ul[data-baseweb="menu"] { background-color: #21262d !important; border: 1px solid #30363d !important; }
+ul[data-baseweb="menu"] li { background-color: #21262d !important; color: #e6edf3 !important; }
+ul[data-baseweb="menu"] li:hover { background-color: #30363d !important; }
+div[data-baseweb="calendar"] { background-color: #161b22 !important; border: 1px solid #30363d !important; }
+div[data-baseweb="calendar"] * { background-color: #161b22 !important; color: #e6edf3 !important; }
+            
 /* Buttons */
 .stButton > button {
     background: #21262d !important;
@@ -148,6 +156,49 @@ img { border-radius: 8px; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #0d1117; }
 ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+/* Kill gray wrapper around all sidebar inputs */
+section[data-testid="stSidebar"] .stTextInput > div,
+section[data-testid="stSidebar"] .stDateInput > div,
+section[data-testid="stSidebar"] .stNumberInput > div,
+section[data-testid="stSidebar"] .stSelectbox > div {
+    background-color: #21262d !important;
+    border: none !important;
+}
+
+section[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {
+    background: transparent !important;
+}
+
+section[data-testid="stSidebar"] .element-container {
+    background: transparent !important;
+}
+
+/* Remove box shadow and border from date inputs */
+section[data-testid="stSidebar"] .stDateInput input,
+section[data-testid="stSidebar"] .stTextInput input,
+section[data-testid="stSidebar"] .stNumberInput input {
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-radius: 0 !important;
+}
+
+section[data-testid="stSidebar"] div[data-baseweb="input"],
+section[data-testid="stSidebar"] div[data-baseweb="base-input"] {
+    background-color: #161b22 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+section[data-testid="stSidebar"] .stDateInput > div > div,
+section[data-testid="stSidebar"] .stTextInput > div > div,
+section[data-testid="stSidebar"] .stNumberInput > div > div {
+    background-color: #161b22 !important;
+    box-shadow: none !important;
+    border: none !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
