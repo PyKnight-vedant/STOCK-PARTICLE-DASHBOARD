@@ -374,8 +374,8 @@ with tab_corr:
 
         djia_log   = np.log(djia_p / djia_p.shift(1)).dropna()
         nasdaq_log = np.log(nasdaq_p / nasdaq_p.shift(1)).dropna()
-        djia_monthly   = djia_log.resample("ME").sum().dropna()
-        nasdaq_monthly = nasdaq_log.resample("ME").sum().dropna()
+        djia_monthly   = djia_log.resample("MS").sum().dropna()
+        nasdaq_monthly = nasdaq_log.resample("MS").sum().dropna()
 
         # ── Metrics row ──
         m1,m2,m3,m4 = st.columns(4)
@@ -448,10 +448,10 @@ with tab_corr:
                 sd = log_ret.std()
                 return {
                     "Daily": (sd,sd),
-                    "Weekly\n(√5)":    (sd*np.sqrt(5),  log_ret.resample("W").sum().dropna().std()),
-                    "Monthly\n(√21)":  (sd*np.sqrt(21), log_ret.resample("ME").sum().dropna().std()),
-                    "Quarterly\n(√63)":(sd*np.sqrt(63), log_ret.resample("QE").sum().dropna().std()),
-                }
+                    "Weekly\n(√5)":    (sd*np.sqrt(5),  log_ret.resample("W-FRI").sum().dropna().std()),
+                    "Monthly\n(√21)":  (sd*np.sqrt(21), log_ret.resample("MS").sum().dropna().std()),
+                    "Quarterly\n(√63)":(sd*np.sqrt(63), log_ret.resample("QS").sum().dropna().std())
+}
             fig, (a1,a2) = plt.subplots(1,2,figsize=(12,5))
             for ax, (ret, title) in [(a1,(djia_log,"DJIA")),(a2,(nasdaq_log,"Nasdaq"))]:
                 d = scaling(ret)
